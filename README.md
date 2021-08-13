@@ -1,2 +1,2 @@
-# go-saloon
+# Go-SaloonWebApp
 Saloon CRM

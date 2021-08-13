@@ -46,6 +46,6 @@ func MySQLConn() *gorm.DB {
 	if err != nil {
 		log.Fatal("Connection Not Established!! ", err)
 	}
-	fmt.Print("Connected to :- ", dbDriver)
+	fmt.Println("Connected to :", dbDriver)
 	return conn
 }

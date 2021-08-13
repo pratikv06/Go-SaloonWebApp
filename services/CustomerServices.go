@@ -1,8 +1,8 @@
 package services
 
 import (
-	"github.com/pratikv06/go-saloon/models"
-	"github.com/pratikv06/go-saloon/repository"
+	"github.com/pratikv06/Go-SaloonWebApp/models"
+	"github.com/pratikv06/Go-SaloonWebApp/repository"
 	"github.com/jinzhu/gorm"
 )
 

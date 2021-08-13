@@ -4,17 +4,18 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	_ "time"
+	"time"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-	"github.com/pratikv06/go-saloon/controllers"
-	"github.com/pratikv06/go-saloon/repository"
-	"github.com/pratikv06/go-saloon/services"
 	"github.com/jinzhu/gorm"
+	"github.com/pratikv06/Go-SaloonWebApp/controllers"
+	"github.com/pratikv06/Go-SaloonWebApp/repository"
+	"github.com/pratikv06/Go-SaloonWebApp/services"
 )
 
 func main() {
+	fmt.Println("------- SaloonAPI -------")
 	conn := MySQLConn()
 	m := mux.NewRouter()
 	route := m.PathPrefix("/api/go").Subrouter()
@@ -24,16 +25,17 @@ func main() {
 	origin := handlers.AllowedOrigins([]string{"*"})
 	srv := &http.Server{
 		Handler: handlers.CORS(header, methods, origin)(route),
-		// WriteTimeout: 150 * time.Second,
-		// ReadTimeout:  150 * time.Second,
+		WriteTimeout: 20 * time.Second,
+		ReadTimeout:  20 * time.Second,
 		Addr: ":9000",
 	}
 
 	route.HandleFunc("/index", index)
+	fmt.Println("Server is Listening...")
 	initiateController(conn, route, repo)
 	log.Fatal(srv.ListenAndServe())
 
-	fmt.Print("After listen")
+	// fmt.Print("After listen")
 	defer func() {
 		conn.Close()
 	}()
